@@ -1,0 +1,51 @@
+
+openapi: 3.0.0
+info:
+  title: Bybit Universal Kline API
+  version: 1.0.0
+paths:
+  /v5/market/kline:
+    get:
+      summary: Get candlestick data for any Bybit symbol
+      parameters:
+        - name: category
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [linear, inverse, spot]
+            example: linear
+        - name: symbol
+          in: query
+          required: true
+          schema:
+            type: string
+            example: BTCUSDT
+        - name: interval
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [1, 3, 5, 15, 30, 60, 120, 240, 360, 720, D, W, M]
+            example: 15
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 200
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success
+servers:
+  - url: https://api.bybit.com
